@@ -4,7 +4,7 @@ This is a repository for DestiGo Apps which is the Product Based Capstone Projec
 
 ## About DestiGo
 
-Destigo (Destination & Go) is an application that has features of various destination options according to user preferences where not only natural destinations but can be culinary destinations, arts and cultural destinations, and historical destinations. This will make it easier for tourists to choose tours according to their preferences
+Destigo (Destination & Go) is an application that has features of various destination options according to user preferences where not only natural destinations but can be culinary destinations, arts and cultural destinations, and historical destinations. This will make it easier for tourists to choose tours according to their preferences.
 
 # Team Members
 
@@ -16,3 +16,11 @@ Destigo (Destination & Go) is an application that has features of various destin
 | Dzaky Hanif Arjuna          | C038DSX1603   |  Cloud Computing     |        Institut Teknologi Sepuluh November |   [LinkedIn](https://www.linkedin.com/in/junajunajeki/)                           |
 | Dimas Triananda Murti Putra | C038DSX4911   |  Cloud Computing     |        Institut Teknologi Sepuluh November |   [LinkedIn](https://www.linkedin.com/in/dimas-triananda-murti-putra-971715190/)  |
 | Sesilia Tiara Rahayu Ada    | A305DSY2752   |  Mobile Development  |        UPN Veteran Jawa Timur              |   [LinkedIn](https://www.linkedin.com/in/sesilia-tiara-rahayu-ada-b88678220/)     |
+
+# Repositories
+
+|   Learning Paths   |                                   Link                                        |
+| :----------------: | :---------------------------------------------------------------------------: |
+| Machine Learning   | [Github](https://github.com/siskasimandalahi/DestiGo/tree/Machine-Learning)   |
+| Cloud Computing    | [Github](https://github.com/siskasimandalahi/DestiGo/tree/Cloud-Computing)    |
+| Mobile Development | [Github](https://github.com/siskasimandalahi/DestiGo/tree/Mobile-Development) |
