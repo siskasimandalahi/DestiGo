@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.get("/account", profile);
+router.post("/account", profile);
 router.get("/logout/:id", logout);
 
 //router.get("/home", homePage); //1
