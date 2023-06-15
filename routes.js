@@ -1,7 +1,7 @@
 const express = require("express");
 
 const {register, login, profile, logout} = require("./controller/penggunaController");
-const {getHomepage, getHomekota, getAbjad, getKategori, getKota, findWisata, getWishlist} = require("./controller/homeController");
+const {getHomepage,  getAbjad, getKategori, getKota, findWisata, getWishlist} = require("./controller/homeController");
 const {detailWisata, addWishlist, deleteWishlist} = require("./controller/wisataController");
 
 const router = express.Router();
@@ -12,7 +12,6 @@ router.post("/account", profile);
 router.get("/logout/:id", logout);
 
 router.get("/homepage", getHomepage); 
-router.get("/homepage/:kota", getHomekota);
 router.get("/Abjad", getAbjad);
 router.get("/Kategori/:kategori", getKategori);
 router.get("/Kota/:kota", getKota);

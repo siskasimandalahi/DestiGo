@@ -25,10 +25,10 @@ const detailWisata = asyncHandler(async (req, res) => {
     let query = db.collection("datawisata").where("nama_tempat", "==", nama_tempat);
     let response = [];
 
-    await query.get().then((data) => {
+    await query.get().then(async (data) => {
       let docs = data.docs;
 
-      docs.map((doc) => {
+      for (const doc of docs) {
         const selectedData = {
           nama_tempat: doc.data().nama_tempat,
           kota: doc.data().kota,
@@ -39,15 +39,32 @@ const detailWisata = asyncHandler(async (req, res) => {
           long: doc.data().long,
         };
 
+        // Ambil data gambar dari koleksi datagambar
+        const dataGambarRef = db.collection("datagambar").where("nama_tempat", "==", nama_tempat);
+        const dataGambarSnapshot = await dataGambarRef.get();
+
+        if (!dataGambarSnapshot.empty) {
+          // Ambil url1, url2, url3, url4, dan url5 dari data gambar
+          const dataGambar = dataGambarSnapshot.docs[0].data();
+          selectedData.url1 = dataGambar.url1;
+          selectedData.url2 = dataGambar.url2;
+          selectedData.url3 = dataGambar.url3;
+          selectedData.url4 = dataGambar.url4;
+          selectedData.url5 = dataGambar.url5;
+        }
+
         response.push(selectedData);
-      });
+      }
       return response;
     });
 
     return res.status(200).send({ status: "Berhasil", data: response });
-  } catch (error) {        console.error('Content creation error:', error);
-  res.status(500).json({ error: 'Content creation failed' });}
+  } catch (error) {
+    console.error('Content creation error:', error);
+    res.status(500).json({ error: 'Content creation failed' });
+  }
 });
+
 
 const addWishlist = asyncHandler(async (req, res) => {
   try {
@@ -67,7 +84,7 @@ const addWishlist = asyncHandler(async (req, res) => {
     }
 
     // Tambahkan tempat wisata ke wishlist pengguna
-    const wishlistRef = db.collection("datawishlist").doc(username); // Ubah referensi koleksi menjadi "datawishlist"
+    const wishlistRef = db.collection("datawishlist").doc(username);
     const wishlistSnapshot = await wishlistRef.get();
 
     if (!wishlistSnapshot.exists) {
@@ -84,10 +101,25 @@ const addWishlist = asyncHandler(async (req, res) => {
       }
     }
 
-    return res.status(200).send({ status: "Berhasil", msg: "Tempat wisata berhasil ditambahkan ke wishlist" });
-  } catch (error) {        console.error('Content creation error:', error);
-  res.status(500).json({ error: 'Content creation failed' });}
+    // Ambil data gambar dari koleksi datagambar
+    const dataGambarRef = db.collection("datagambar").where("nama_tempat", "==", nama_tempat);
+    const dataGambarSnapshot = await dataGambarRef.get();
+
+    if (dataGambarSnapshot.empty) {
+      return res.status(404).send({ status: "Gagal", msg: "Data gambar tidak ditemukan" });
+    }
+
+    // Ambil url1 dari data gambar
+    const url1 = dataGambarSnapshot.docs[0].data().url1;
+
+    // Kirim respons dengan nama_tempat, username, dan url1
+    return res.status(200).send({ status: "Sukses", nama_tempat, username, url1 });
+
+  } catch (error) {
+    return res.status(500).send({ status: "Gagal", msg: "Terjadi kesalahan pada server" });
+  }
 });
+
 
 const deleteWishlist = asyncHandler(async (req, res) => {
   try {
