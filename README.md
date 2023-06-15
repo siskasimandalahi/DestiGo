@@ -4,6 +4,14 @@ This is a repository for DestiGo Apps which is the Product Based Capstone Projec
 
 ## About DestiGo
 
+<br />
+<p align="center">
+  <a href="#">
+    <img src="logo_destigo.png">
+  </a>
+</p>
+<br>
+
 Destigo (Destination & Go) is an application that has features of various destination options according to user preferences where not only natural destinations but can be culinary destinations, arts and cultural destinations, and historical destinations. This will make it easier for tourists to choose tours according to their preferences.
 
 # Team Members
