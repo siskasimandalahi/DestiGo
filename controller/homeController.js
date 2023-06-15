@@ -3,8 +3,75 @@ const Firestore = require('@google-cloud/firestore');
 
 const db = new Firestore
 ({
-	projectID: 'destigo-2bac7', keyFilename: './serviceAccount/destigo-2bac7-3db7b9f0e1ca.json',
+	projectID: 'destigo-2bac7', keyFilename: './serviceAccount/destigo-2bac7-firebase-adminsdk-k8o5w-bf217375d8.json',
 });
+
+const getHomepage = asyncHandler (async (req, res) => {
+  try {
+    // Mendapatkan daftar kota
+    const kotaList = await getKota(req, res);
+
+    // Mendapatkan daftar kategori
+    const kategoriList = ['Alam', 'Budaya', 'Kuliner', 'Pusat Perbelanjaan', 'Taman Hiburan', 'Tempat Ibadah']; // Ganti dengan kategori yang sesuai
+
+    // Mendapatkan wishlist pengguna
+    const username = req.query.username;
+    const wishlist = await getWishlist({ params: { username } }, res);
+
+    // Menyusun data untuk homepage
+    const homepageData = {
+      kotaList: kotaList.data,
+      kategoriList,
+      wishlist: wishlist.data,
+    };
+
+    res.status(200).send({ status: 'Berhasil', data: homepageData });
+  } catch (error) {        console.error('Content creation error:', error);
+        res.status(500).json({ error: 'Content creation failed' });}
+});
+
+const getHomekota = asyncHandler(async (req, res) => {
+  try {
+    const kota = req.params.kota;
+    const kategori = req.query.kategori;
+    const nama_tempat = req.query.nama_tempat;
+
+    let query = db.collection('datawisata').where('kota', '==', kota);
+
+    if (kategori) {
+      query = query.where('kategori', '==', kategori);
+    }
+
+    if (nama_tempat) {
+      query = query.where('nama_tempat', '==', nama_tempat);
+    }
+
+    let response = [];
+
+    await query.get().then((data) => {
+      let docs = data.docs;
+
+      docs.map((doc) => {
+        const selectedData = {
+          nama_tempat: doc.data().nama_tempat,
+          kategori: doc.data().kategori,
+          alamat: doc.data().alamat,
+          kota: doc.data().kota,
+          deskripsi: doc.data().deskripsi,
+          lat: doc.data().lat,
+          long: doc.data().long,
+        };
+
+        response.push(selectedData);
+      });
+      return response;
+    });
+
+    res.status(200).send({ status: 'Berhasil', data: response });
+  } catch (error){        console.error('Content creation error:', error);
+        res.status(500).json({ error: 'Content creation failed' });}
+});
+
 
 const getAbjad = asyncHandler (async(req,res) => {
 	 try {
@@ -25,43 +92,39 @@ const getAbjad = asyncHandler (async(req,res) => {
 		
         } 
         catch (error) 
-		{
-        console.log(error);
-        res.status(500).send({ status: "Gagal", msg: error });
-		}
+        {        console.error('Content creation error:', error);
+        res.status(500).json({ error: 'Content creation failed' });}
     });
 	
-const getKategori = asyncHandler (async(req,res) => {
-     try {
-        const kategori = req.params.kategori;
-        let query = db.collection("datawisata").where("kategori", "==", kategori);
-        let response = [];
-  
-        await query.get().then((data) => {
-          let docs = data.docs; // query results
-  
-          docs.map((doc) => {
-            const selectedData = {
-                nama_tempat: doc.data().nama_tempat,
-                kategori : doc.data.kategori,
-                alamat : doc.data.alamat,
-                kota : doc.data.kota,
-                deskripsi : doc.data.deskripsi,
-                lat : doc.data.lat,
-                long : doc.data.long,
-            };
-  
-            response.push(selectedData);
-          });
-          return response;
-        });
-  
-        return res.status(200).send({ status: "Berhasil", data: response });
-      } catch (error) 
-	  {
-        console.log(error);
-        res.status(500).send({ status: "Gagal", msg: error });
-      }
+    const getKategori = asyncHandler (async(req,res) => {
+      try {
+            const kategori = req.params.kategori; 
+      
+            if (!kategori) {
+              return res.status(400).send({ status: "Gagal", msg: "Parameter kategori tidak ditemukan" });
+            }
+      
+            let query = db.collection("datawisata").where("kategori", "==", kategori); // Mengubah query untuk memfilter berdasarkan kota
+            let response = [];
+      
+            await query.get().then((data) => {
+              let docs = data.docs; // query results
+      
+              docs.map((doc) => {
+                const selectedData = {
+                  nama_tempat: doc.data().nama_tempat,
+                };
+      
+                response.push(selectedData);
+              });
+              return response;
+            });
+      
+            return res.status(200).send({ status: "Berhasil", data: response });
+          } 
+        catch (error) 
+        {        console.error('Content creation error:', error);
+      res.status(500).json({ error: 'Content creation failed' });}
 });
 
 const getKota = asyncHandler (async(req,res) => {
@@ -91,10 +154,8 @@ const getKota = asyncHandler (async(req,res) => {
         return res.status(200).send({ status: "Berhasil", data: response });
       } 
 	  catch (error) 
-	  {
-        console.log(error);
-        res.status(500).send({ status: "Gagal", msg: error });
-      }
+	  {        console.error('Content creation error:', error);
+  res.status(500).json({ error: 'Content creation failed' });}
 });
   
 const findWisata = asyncHandler(async (req, res) => {
@@ -123,13 +184,11 @@ const findWisata = asyncHandler(async (req, res) => {
     });
 
     return res.status(200).send({ status: "Berhasil", data: response });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "Gagal", msg: error });
-  }
+  } catch (error) {        console.error('Content creation error:', error);
+  res.status(500).json({ error: 'Content creation failed' });}
 });
 
-constWishlist = asyncHandler(async (req, res) => {
+const getWishlist = asyncHandler(async (req, res) => {
   try {
     const username = req.params.username;
 
@@ -147,14 +206,12 @@ constWishlist = asyncHandler(async (req, res) => {
 
     const wishlist = wishlistSnapshot.data().wishlist;
     return res.status(200).send({ status: "Berhasil", data: wishlist });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "Gagal", msg: error });
-  }
+  } catch (error) {        console.error('Content creation error:', error);
+  res.status(500).json({ error: 'Content creation failed' });}
 });
 
 
-
+module.exports = {getHomepage,getHomekota, getAbjad, getKategori, getKota, findWisata, getWishlist,}
 
 
 

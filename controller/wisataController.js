@@ -1,20 +1,17 @@
 const asyncHandler = require ("express-async-handler");
 const Firestore = require('@google-cloud/firestore');
-const {createClient} = require('@supabase/supabase-js');
-require('dotenv').config();
 
+const db = new Firestore
+({
+	projectID: 'destigo-2bac7', keyFilename: './serviceAccount/destigo-2bac7-firebase-adminsdk-k8o5w-bf217375d8.json',
+});
 //const {uploadImage} = require
 
-const supabase = createClient ('https://pfxabfbcaljnbvrvsyqj.supabase.co', process.env.SUPABASE_KEY);
+//const supabase = createClient ('https://pfxabfbcaljnbvrvsyqj.supabase.co', process.env.SUPABASE_KEY);
 
 // const supabaseUrl = 'https://bpsmobjqnwxpsawzapnn.supabase.co'
 // const supabaseKey = process.env.SUPABASE_KEY
 // const supabase = createClient(supabaseUrl, supabaseKey)
-
-const db = new Firestore
-({
-	projectID: '', keyFilename: '',
-});
 
 
 const detailWisata = asyncHandler(async (req, res) => {
@@ -48,10 +45,8 @@ const detailWisata = asyncHandler(async (req, res) => {
     });
 
     return res.status(200).send({ status: "Berhasil", data: response });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "Gagal", msg: error });
-  }
+  } catch (error) {        console.error('Content creation error:', error);
+  res.status(500).json({ error: 'Content creation failed' });}
 });
 
 const addWishlist = asyncHandler(async (req, res) => {
@@ -90,10 +85,8 @@ const addWishlist = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).send({ status: "Berhasil", msg: "Tempat wisata berhasil ditambahkan ke wishlist" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "Gagal", msg: error });
-  }
+  } catch (error) {        console.error('Content creation error:', error);
+  res.status(500).json({ error: 'Content creation failed' });}
 });
 
 const deleteWishlist = asyncHandler(async (req, res) => {
@@ -124,10 +117,8 @@ const deleteWishlist = asyncHandler(async (req, res) => {
     } else {
       return res.status(400).send({ status: "Gagal", msg: "Tempat wisata tidak ditemukan di wishlist" });
     }
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "Gagal", msg: error });
-  }
+  } catch (error) {        console.error('Content creation error:', error);
+  res.status(500).json({ error: 'Content creation failed' });}
 });
 
 

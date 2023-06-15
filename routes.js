@@ -1,7 +1,7 @@
 const express = require("express");
 
 const {register, login, profile, logout} = require("./controller/penggunaController");
-const {homePage, getAbjad, getKategori, getKota, findWisata, getWishlist} = require("./controller/homeController");
+const {getHomepage, getHomekota, getAbjad, getKategori, getKota, findWisata, getWishlist} = require("./controller/homeController");
 const {detailWisata, addWishlist, deleteWishlist} = require("./controller/wisataController");
 
 const router = express.Router();
@@ -11,15 +11,16 @@ router.post("/login", login);
 router.post("/account", profile);
 router.get("/logout/:id", logout);
 
-//router.get("/home", homePage); //1
-// router.get("/Abjad", getAbjad);
-// router.get("/Kategori", getKategori);
-// router.get("/Kota", getKota);
-// router.get("/search", findWisata);
-// router.get("/wishlist", getWishlist); 
+router.get("/homepage", getHomepage); 
+router.get("/homepage/:kota", getHomekota);
+router.get("/Abjad", getAbjad);
+router.get("/Kategori/:kategori", getKategori);
+router.get("/Kota/:kota", getKota);
+router.get("/search/:nama_tempat", findWisata);
+router.get("/wishlist/:username", getWishlist); 
 
-router.get("/informasi", detailWisata);
-router.post("/add/:nama_tempat", addWishlist);
-router.delete("/delete/:nama_tempat", deleteWishlist);
+router.get("/informasi/:nama_tempat", detailWisata);
+router.post("/add", addWishlist);
+router.delete("/delete", deleteWishlist);
 
 module.exports = router;
