@@ -93,7 +93,7 @@ Response:
 ### Homepage (GET)
 ```
 request: /homepage
-
+```
 Response:
 ``` json
 {
@@ -178,6 +178,7 @@ Response:
 request: /wishlist/:username
 ```
 Response: 
+``` json
 {
    "nama_tempat": "Sunrise Point Cukul",
    "url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg"
