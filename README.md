@@ -93,7 +93,7 @@ Response:
 ### Homepage (GET)
 ```
 request: /homepage
-
+```
 Response:
 ``` json
 {
@@ -144,7 +144,7 @@ Response:
 "nama_tempat": "Taman Lapangan Banteng"
 },
 {
-            "nama_tempat": "Taman Hiburan Rakyat"
+"nama_tempat": "Taman Hiburan Rakyat"
 },
 ```
 ### Kota (GET)
@@ -154,12 +154,12 @@ request: /Kota/:kota
 Response:
 ``` json
 {
-            "nama_tempat": "Sunrise Point Cukul",
-            "url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg"
+"nama_tempat": "Sunrise Point Cukul",
+"url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg"
 },
 {
-            "nama_tempat": "Atmosphere Resort Cafe",
-            "url1": "https://media-cdn.tripadvisor.com/media/photo-s/02/ce/15/c8/beautiful.jpg"
+"nama_tempat": "Atmosphere Resort Cafe",
+"url1": "https://media-cdn.tripadvisor.com/media/photo-s/02/ce/15/c8/beautiful.jpg"
 },
 ```
 ### Search (GET)
@@ -169,8 +169,8 @@ request: /search/:nama_tempa
 Response:
 ``` json
 {
-            "nama_tempat": "Sunrise Point Cukul",
-            "kota": "Bandung"
+"nama_tempat": "Sunrise Point Cukul",
+"kota": "Bandung"
 }
 ```
 ### Wishlist (GET)
@@ -179,8 +179,8 @@ request: /wishlist/:username
 ```
 Response: 
 {
-            "nama_tempat": "Sunrise Point Cukul",
-            "url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg"
+"nama_tempat": "Sunrise Point Cukul",
+"url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg"
 }
 ```
 ### Add wishlist wisata (POST)
@@ -213,18 +213,18 @@ Response:
 "status": "Berhasil",
 “data": [
 {
-            "nama_tempat": "Sunrise Point Cukul",
-            "kota": "Bandung",
-            "deskripsi": "Sunrise Point Cukul adalah sebuah lokasi yang terletak di daerah Cukul, Kabupaten Bandung. Tempat ini terkenal karena pemandangan matahari terbit yang memukau yang dapat dinikmati dari titik tertentu di lokasi tersebut. Saat matahari mulai muncul di cakrawala, pengunjung dapat menyaksikan keindahan alam yang menakjubkan dengan langit yang terang dan pemandangan pegunungan yang mempesona. Keindahan alam yang dipadukan dengan warna-warni langit saat matahari terbit menciptakan momen yang sangat indah dan fotogenik. Sunrise Point Cukul juga menawarkan area yang nyaman untuk duduk atau berdiri sambil menikmati pemandangan alam yang spektakuler. ",
-            "kategori": "Alam",
-            "alamat": "Jl. Cukul, Sukaluyu, Kec. Pangalengan, Kabupaten Bandung",
-            "lat": -7.233689,
-            "long": 107.5342933,
-            "url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg",
-            "url2": "https://djavatoday.com/wp-content/uploads/2022/08/IMG-20220802-WA0054_compress87-768x500.jpg",
-            "url3": "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2021/12/26/3217957826.jpg",
-            "url4": "",
-            "url5": ""
+"nama_tempat": "Sunrise Point Cukul",
+"kota": "Bandung",
+"deskripsi": "Sunrise Point Cukul adalah sebuah lokasi yang terletak di daerah Cukul, Kabupaten Bandung. Tempat ini terkenal karena pemandangan matahari terbit yang memukau yang dapat dinikmati dari titik tertentu di lokasi tersebut. Saat matahari mulai muncul di cakrawala, pengunjung dapat menyaksikan keindahan alam yang menakjubkan dengan langit yang terang dan pemandangan pegunungan yang mempesona. Keindahan alam yang dipadukan dengan warna-warni langit saat matahari terbit menciptakan momen yang sangat indah dan fotogenik. Sunrise Point Cukul juga menawarkan area yang nyaman untuk duduk atau berdiri sambil menikmati pemandangan alam yang spektakuler. ",
+"kategori": "Alam",
+"alamat": "Jl. Cukul, Sukaluyu, Kec. Pangalengan, Kabupaten Bandung",
+"lat": -7.233689,
+ "long": 107.5342933,
+ "url1": "https://asset.kompas.com/crops/nG2HXjKEC1s4eEeJNAM3m2W9X0E=/0x23:700x373/750x500/data/photo/2020/09/07/5f5581f1e138a.jpg",
+"url2": "https://djavatoday.com/wp-content/uploads/2022/08/IMG-20220802-WA0054_compress87-768x500.jpg",
+"url3": "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2021/12/26/3217957826.jpg",
+"url4": "",
+"url5": ""
         }
     ]
 }
@@ -271,4 +271,3 @@ http://localhost:8080
 ```
 https://backend-dot-destigo-2bac7.et.r.appspot.com
 ```
-
