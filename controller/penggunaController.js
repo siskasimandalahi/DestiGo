@@ -139,6 +139,51 @@ const profile = asyncHandler(async(req, res) => {
   res.status(500).json({ error: 'Content creation failed' });}
 });
 
+const updateProfile = asyncHandler(async (req, res) => {
+  try {
+    // Ganti cara mengakses ID dari URL
+    const id = req.params.id;
+
+    // Tambahkan pemeriksaan untuk memastikan id tidak kosong
+    if (!id || typeof id !== 'string') {
+      res.status(400).json({ message: 'ID tidak valid' });
+      return;
+    }
+
+    const documentRef = db.collection('datalogin').doc(id);
+
+    const documentSnaps = await documentRef.get();
+
+    if (!documentSnaps.exists) {
+      res.status(404).json({ message: 'User tidak ditemukan' });
+      return;
+    }
+
+    // Ganti cara mengakses data dari body request
+    const updatedData = {
+      email: req.body.Email || documentSnaps.data().email,
+      username: req.body.Username || documentSnaps.data().username,
+      nama_lengkap: req.body.nama_Lengkap || documentSnaps.data().nama_lengkap,
+      telepon: req.body.Telepon || documentSnaps.data().telepon,
+      password: req.body.password || documentSnaps.data().password,
+    };
+
+    await documentRef.update(updatedData);
+
+    res.status(200).json({
+      message: 'Profile berhasil diperbarui',
+      Email: updatedData.email,
+      Username: updatedData.username,
+      nama_Lengkap: updatedData.nama_lengkap,
+      Telepon: updatedData.telepon,
+    });
+  } catch (error) {
+    console.error('Profile update error:', error);
+    res.status(500).json({ error: 'Profile update failed' });
+  }
+});
+
+
 const logout = asyncHandler(async(req, res) => {
 	 try {
       const {id} = req.params;
@@ -159,4 +204,4 @@ const logout = asyncHandler(async(req, res) => {
 	{res.status(500).json({ message: 'Internal server error' });}
 });
 
-module.exports = {register, login, profile, logout,}
+module.exports = {register, login, profile, updateProfile,logout}

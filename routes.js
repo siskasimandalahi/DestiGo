@@ -1,6 +1,6 @@
 const express = require("express");
 
-const {register, login, profile, logout} = require("./controller/penggunaController");
+const {register, login, profile, updateProfile, logout} = require("./controller/penggunaController");
 const {getHomepage,  getAbjad, getKategori, getKota, findWisata, getWishlist} = require("./controller/homeController");
 const {detailWisata, addWishlist, deleteWishlist} = require("./controller/wisataController");
 
@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.post("/account", profile);
+router.put("/update/:id", updateProfile);
 router.get("/logout/:id", logout);
 
 router.get("/homepage", getHomepage); 
